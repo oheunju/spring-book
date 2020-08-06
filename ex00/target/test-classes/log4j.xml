@@ -10,6 +10,17 @@
 		</layout>
 	</appender>
 	
+	<!-- warn logger -->
+	<logger name="jdbc.audit">
+		<level value="warn" />
+	</logger>
+	<logger name="jdbc.resultset">
+		<level value="warn" />
+	</logger>
+	<logger name="jdbc.connection">
+		<level value="warn" />
+	</logger>
+	
 	<!-- Application Loggers -->
 	<logger name="com.zerock.controller">
 		<level value="info" />
