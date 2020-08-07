@@ -1,5 +1,7 @@
 package org.zerock.config;
 
+import javax.servlet.ServletRegistration;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebConfig
@@ -22,6 +24,13 @@ public class WebConfig
     protected String[] getServletMappings()
     {
         return new String[] {"/"};
+    }
+    
+    // 404에러
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration)
+    {
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 
 }

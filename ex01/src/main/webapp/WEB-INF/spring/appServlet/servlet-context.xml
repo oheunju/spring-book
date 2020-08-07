@@ -21,8 +21,19 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="org.zerock.controller" />
+	<!-- 파일 업로드 관련 -->
+	<beans:bean id="multipartResolver" 
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="utf-8" />	
+		<!-- 1024 * 1024 * 10 bytes 10MB -->		
+		<beans:property name="maxUploadSize" value="104857560" />
+		<!-- 1024 * 1024 * 2 bytes 2MB -->
+		<beans:property name="uploadTempDir" value="file:/C:/upload/tmp" />
+		<beans:property name="maxInMemorySize" value="10485756" />
+	</beans:bean>
 	
+	<context:component-scan base-package="org.zerock.controller" />
+	<context:component-scan base-package="org.zerock.exception" />
 	
 	
 </beans:beans>

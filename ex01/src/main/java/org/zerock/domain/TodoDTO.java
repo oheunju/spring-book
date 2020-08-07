@@ -4,9 +4,14 @@ import java.util.Date;
 
 import lombok.Data;
 
-@Data
+@Data 
+
 public class TodoDTO
 {
     private String title;
-    private Date dueDate;
+    
+    
+//  @DateTimeFormat(pattern = "yyyy/MM/dd")
+//  Controller의 @InitBinder 대신 사용 가능
+  private Date dueDate;
 }
