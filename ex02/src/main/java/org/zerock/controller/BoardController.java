@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import javax.imageio.spi.RegisterableService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,12 @@ public class BoardController
     {
         log.info("list");
         model.addAttribute("list", service.getList());
+    }
+    
+    @GetMapping("/register")
+    public void RegisterableService()
+    {
+        
     }
     
     @PostMapping("/register")
