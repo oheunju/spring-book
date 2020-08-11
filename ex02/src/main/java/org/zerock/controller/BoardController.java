@@ -1,6 +1,6 @@
 package org.zerock.controller;
 
-import javax.imageio.spi.RegisterableService;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +63,7 @@ public class BoardController
         if(service.modify(board))
             rttr.addFlashAttribute("result", "success");
         
-        return "redirec:/board/list";
+        return "redirect:/board/list";
     }
     
     @PostMapping("/remove")
