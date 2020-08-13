@@ -17,3 +17,4 @@ select seq_board.nextval, title, content, writer from tbl_board;
 
 select * from tbl_board;
 commit;
+
