@@ -1,3 +1,6 @@
+-----------------------------------
+-------------- 게시글 --------------
+-----------------------------------
 create sequence seq_board;
 
 create table tbl_board
@@ -17,4 +20,23 @@ select seq_board.nextval, title, content, writer from tbl_board;
 
 select * from tbl_board;
 commit;
+
+---------------------------------
+-------------- 댓글 --------------
+---------------------------------
+create table tbl_reply
+(
+    rno number(10,0),
+    bno number(10,0) not null,
+    reply varchar2(1000) not null,
+    replyer varchar2(50) not null,
+    replyDate date default sysdate,
+    updateDate date default sysdate
+);
+
+create sequence seq_reply;
+
+alter table tbl_reply add constraint pk_reply primary key (rno);
+alter table tbl_reply add constraint fk_reply_board foreign key (bno) references tbl_board (bno);
+
 
