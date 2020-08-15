@@ -39,4 +39,4 @@ create sequence seq_reply;
 alter table tbl_reply add constraint pk_reply primary key (rno);
 alter table tbl_reply add constraint fk_reply_board foreign key (bno) references tbl_board (bno);
 
-
+select * from tbl_reply;
