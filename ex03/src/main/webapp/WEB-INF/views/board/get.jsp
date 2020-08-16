@@ -67,28 +67,22 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<ul class="chat">
-					<!-- start reply -->
-					<li class="left clearfix" data-rno='12'>
-						<div>
-							<div class="header">
-								<strong class="primary-font">user00</strong>
-								<small class="pull-right text-muted">2018-01-01- 13:13</small>
-							</div>
-							<p>Good job!</p>
-						</div>
-					</li>
-					<!-- end reply -->
 				</ul>
 				<!-- ./ end ul -->
 			</div>
 			<!-- /.panel .chat-panel -->
+			
+			<!-- REPLY PAGING -->
+			<div class="panel-footer">
+				
+			</div>
+			
 		</div>
 	</div>
 	<!-- ./ end row -->
 </div>
 
 <!-- 댓글 등록 MODAL -->
-<!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -136,10 +130,17 @@ $(function()
 	{
 		replyService.getList({bno:bnoValue, page:page||1}, function(list) 
 				{
+					//댓글 등록시 -1 전달하여 마지막 페이지 호출
+					if(page == -1)
+					{
+						pageNum = Math.ceil(replyCnt/10.0);
+						showList(pageNum);
+						return;
+					}
+					
 					var str = "";
 					if(list == null || list.length == 0)
 					{
-						replyUL.html("");
 						return;
 					}
 					for(var i = 0, len = list.length || 0; i < len; i++)
@@ -177,6 +178,7 @@ $(function()
 		$(".modal").modal("show");
 	});
 	
+	//댓글 등록
 	modalRegisterBtn.on("click", function(e) 
 	{
 		var reply = {
@@ -191,6 +193,54 @@ $(function()
 			modal.find("input").val("");
 			modal.modal("hide");
 			
+			//showList(1);
+			showList(-1);
+		});
+	});
+	
+	//댓글 클릭 이벤트(수정, 삭제)
+	$(".chat").on("click", "li", function(e) 
+	{
+		var rno = $(this).data("rno");
+		
+		replyService.get(rno, function(reply) 
+		{
+			modalInputReply.val(reply.reply);
+			modalInputReplyer.val(reply.replyer);
+			modalInputReplyDate.val(replyService.displayTime(reply.replyDate))
+				.attr("readonly", "readonly");
+			modal.data("rno", reply.rno);
+			
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			modalModBtn.show();
+			modalRemoveBtn.show();
+			
+			$(".modal").modal("show");
+		});
+	});
+	
+	//댓글 수정
+	modalModBtn.on("click", function(e) 
+	{
+		var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
+		
+		replyService.update(reply, function(result) 
+		{
+			alert(result);
+			modal.modal("hide");
+			showList(1);
+		});
+	});
+	
+	//댓글 삭제
+	modalRemoveBtn.on("click", function(e) 
+	{
+		var rno = modal.data("rno");
+		
+		replyService.remove(rno, function(result) 
+		{
+			alert(result);
+			modal.modal("hide");
 			showList(1);
 		});
 	});
