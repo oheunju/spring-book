@@ -128,7 +128,7 @@ $(function()
 	
 	function showList(page)
 	{
-		replyService.getList({bno:bnoValue, page:page||1}, function(list) 
+		replyService.getList({bno:bnoValue, page:page||1}, function(replyCnt, list) 
 				{
 					//댓글 등록시 -1 전달하여 마지막 페이지 호출
 					if(page == -1)
@@ -154,6 +154,9 @@ $(function()
 					}
 					
 					replyUL.html(str);
+					
+					//댓글 페이징
+					showReplyPage(replyCnt);
 					
 				});
 	}
@@ -228,7 +231,7 @@ $(function()
 		{
 			alert(result);
 			modal.modal("hide");
-			showList(1);
+			showList(pageNum);
 		});
 	});
 	
@@ -243,6 +246,62 @@ $(function()
 			modal.modal("hide");
 			showList(1);
 		});
+	});
+	
+	//댓글 페이징
+	var pageNum = 1;
+	var replyPageFooter = $(".panel-footer");
+	
+	function showReplyPage(replyCnt)
+	{
+		var endNum = Math.ceil(pageNum / 10.0) * 10;
+		var startNum = endNum - 9;
+		
+		var prev = startNum != 1;
+		var next = false;
+		
+		if(endNum * 10 >= replyCnt)
+			endNum = Math.ceil(replyCnt/10.0);
+		
+		if(endNum * 10 < replyCnt)
+			next = true;
+		
+		var str = "<ul class='pagination pull-right'>";
+		
+		if(prev)
+		{
+			str += "<li class='page-item'><a class='page-link' href='" 
+					+ (startNum -1) + "'>Previous</a></li>";
+		}
+		
+		for(var i = startNum; i <= endNum; i++)
+		{
+			var active = pageNum == i ? "active" : "";
+			
+			str += "<li class='page-item " + active + " '><a class='page-link' href='" 
+					+ i + "'>" + i + "</a></li>";
+		}
+		
+		if(next)
+		{
+			str += "<li class='page-item'><a class='page-link' href='" 
+					+ (endNum +1) + "'>Next</a></li>";
+		}
+		
+		str += "</ul></div>";
+		
+		replyPageFooter.html(str); 
+			
+	}
+	
+	//페이지 번호 클릭시 새로운 댓글 가져오기
+	replyPageFooter.on("click", "li a", function(e)
+	{
+		e.preventDefault();
+		
+		var targetPageNum = $(this).attr("href");
+		pageNum = targetPageNum;
+		showList(pageNum);
 	});
 })
 
