@@ -13,13 +13,17 @@
 	<input type='file' name='uploadFile' multiple>
 </div>
 
+<div class='bigPictureWrapper'>
+	<div class='bigPicture'>
+	</div>
+</div>
+
 <style>
 .uploadResult
 {
 	width: 100%;
 	background-color: gray;
 }
-
 .uploadResult ul
 {
 	display: flex;
@@ -27,16 +31,42 @@
 	justify-content: center;
 	align-items: center;
 }
-
 .uploadResult ul li
 {
 	list-style: none;
 	padding: 10px;
 }
-
 .uploadResult ul li img
 {
 	width: 20px;
+}
+.uploadResult ul li span
+{
+	color: white;
+}
+.bigPictureWrapper
+{
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: gray;
+	z-index: 100;
+	background: rgba(255,255,255,0.5);
+}
+.bigPicture
+{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bigPicture img
+{
+	width: 600px;
 }
 </style>
 
@@ -50,6 +80,17 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
+function showImage(fileCallPath)
+{
+	//alert(fileCallPath);	
+	
+	$(".bigPictureWrapper").css("display", "flex").show();
+
+	$(".bigPicture").html("<img src='/jex05/display?fileName=" + encodeURI(fileCallPath) + "'>")
+					.animate({width: '100%', height: '100%'}, 1000);
+}
+
+
 $(function() 
 {
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alx)$");
@@ -96,7 +137,7 @@ $(function()
 		
 		$.ajax
 		({
-			url: '/ex05/uploadAjaxAction',
+			url: '/jex05/uploadAjaxAction',
 			processData: false,
 			contentType: false,
 			data: formData,
@@ -123,15 +164,62 @@ $(function()
 		$(uploadResultArr).each(function(i, obj) 
 		{
 			if(!obj.image)
-				str += "<li><img src='/ex05/resources/img/attach.png'>" + obj.fileName + "</li>";
+			{
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+				
+				str += "<li><div><a href='/jex05/download?fileName=" + fileCallPath + "'>"
+				+ "<img src='/jex05/resources/img/attach.png'>" + obj.fileName + "</a>"
+				+ "<span data-file=\'" + fileCallPath + "\' data-type='file'> x </span></div></li>";
+			}
 				
 			else
-				str += "<li>" + obj.fileName + "</li>";
+			{
+				//str += "<li>" + obj.fileName + "</li>";
+				
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+				
+				var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName;
+				originPath = originPath.replace(new RegExp(/\\/g), "/");
+				
+				str += "<li><a href=\"javascript:showImage(\'" + originPath + "\')\">"
+						+ "<img src='/jex05/display?fileName=" + fileCallPath + "'></a>"
+						+ "<span data-file=\'" + fileCallPath + "\' data-type='image'> x </span></li>";
+				
+			}
 				
 		});
 		
 		uploadResult.append(str);
 	}
+	
+	//원본 이미지 클릭시 사라지도록 하기
+	$(".bigPictureWrapper").on("click", function(e) 
+	{
+		$(".bigPicture").animate({width: '0%', height: '0%'}, 1000);
+		setTimeout(() => {
+			$(this).hide();
+		}, 1000);
+	});
+	
+	//첨부파일 삭제
+	$(".uploadResult").on("click", "span", function(e) 
+	{
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		console.log(targetFile);
+		
+		$.ajax
+		({
+			url: '/jex05/deleteFile',
+			data: {fileName: targetFile, type: type},
+			dataType: 'text',
+			type: 'POST',
+			success: function(result)
+			{
+				alert(result);
+			}
+		});
+	});
 })
 </script>
 </body>
