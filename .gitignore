@@ -12,3 +12,11 @@ jex01/target/m2e-wtp/web-resources/META-INF/maven/org.zerock/controller/pom.prop
 jex02/target/m2e-wtp/web-resources/META-INF/maven/org.zerock/controller/pom.properties
 jex05/target/m2e-wtp/web-resources/META-INF/maven/org.zerock/controller/pom.properties
 jex05/target/m2e-wtp/web-resources/META-INF/maven/org.zerock/controller/pom.xml
+Servers2/.project
+Servers2/.settings/org.eclipse.wst.server.core.prefs
+Servers2/Tomcat v8.5 Server at localhost-config/catalina.policy
+Servers2/Tomcat v8.5 Server at localhost-config/catalina.properties
+Servers2/Tomcat v8.5 Server at localhost-config/context.xml
+Servers2/Tomcat v8.5 Server at localhost-config/server.xml
+Servers2/Tomcat v8.5 Server at localhost-config/tomcat-users.xml
+Servers2/Tomcat v8.5 Server at localhost-config/web.xml
