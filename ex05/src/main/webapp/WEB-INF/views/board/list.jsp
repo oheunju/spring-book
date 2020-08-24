@@ -49,7 +49,7 @@
                             <!-- search -->
                             <div class='row'>
                             	<div class="col-lg-12">
-                            		<form id='searchForm' action="/ex02/board/list" method="get">
+                            		<form id='searchForm' action="/board/list" method="get">
                             			<select name='type'>
                             				<option value=""
                             					<c:out value="${pageMaker.cri.type == null ? 'selected' : ''}"/>>--</option>
@@ -98,7 +98,7 @@
                             </div>
                             <!-- end Pagination -->
                             
-                            <form id='actionForm' action="/ex02/board/list" method='get'>
+                            <form id='actionForm' action="/board/list" method='get'>
                             	<input type='hidden'  name='pageNum' value='${pageMaker.cri.pageNum }'>
                             	<input type='hidden'  name='amount' value='${pageMaker.cri.amount }'>
                             	<input type='hidden'  name='type' value='<c:out value="${pageMaker.cri.type }"/>'>
@@ -150,7 +150,7 @@ $(function()
 	}
 	
 	$("#regBtn").on("click", function() {
-		self.location = "/ex02/board/register";
+		self.location = "/board/register";
 	});
 	
 	var actionForm = $("#actionForm");
@@ -168,7 +168,7 @@ $(function()
 		e.preventDefault();
 		
 		actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
-		actionForm.attr("action", "/ex02/board/get");
+		actionForm.attr("action", "/board/get");
 		actionForm.submit();
 	});
 	

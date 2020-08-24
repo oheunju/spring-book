@@ -18,7 +18,7 @@
 			<div class="panel-heading">Board Modify Page</div>
 			<!-- /.pane-heading -->
 			<div class="panel-body">
-				<form role="form" action="/ex02/board/modify" method="post">
+				<form role="form" action="/board/modify" method="post">
 				
 					<!-- 추가 -->
 					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }" />'>
@@ -82,12 +82,12 @@ $(function()
 		console.log(operation);
 		
 		if(operation === 'remove')
-			formObj.attr("action", "/ex02/board/remove");
+			formObj.attr("action", "/board/remove");
 		
 		else if(operation === 'list')
 		{
 			//move to list
-			formObj.attr("action", "/ex02/board/list").attr("method", "get");
+			formObj.attr("action", "/board/list").attr("method", "get");
 			var pageNumTag = $("input[name='pageNum']").clone();
 			var amountTag = $("input[name='amount']").clone();
 			var typeTag = $("input[name='type']").clone();
