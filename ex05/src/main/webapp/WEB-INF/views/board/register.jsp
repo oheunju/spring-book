@@ -222,7 +222,7 @@ $(function()
 			if(obj.image)
 			{
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
-				str += "<li data-path='"+obj.uploadPath"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
+				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
 				str += "<span>" + obj.fileName + "</span>";
 				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' ";
 				str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i><button><br>";
@@ -234,7 +234,7 @@ $(function()
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
 				var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
 				
-				str += "<li data-path='"+obj.uploadPath"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
+				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'><div>";
 				str += "<span>" + obj.fileName + "</span>";
 				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' ";
 				str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i><button><br>";
