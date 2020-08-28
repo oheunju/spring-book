@@ -118,6 +118,26 @@
 <!-- /.modal -->
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
+<!-- 
+		첨부파일 관련 script
+ -->
+<script>
+$(function()
+{
+	(function()
+	{
+		var bno = '<c:out value="${board.bno}"/>';
+		
+		$.getJSON("/board/getAttachList", {bno: bno}, function(arr)
+		{
+			console.log(arr);
+		});
+	});
+});
+</script>
+<!-- 
+		댓글 관련 script
+ -->
 <script type="text/javascript">
 $(function() 
 {
