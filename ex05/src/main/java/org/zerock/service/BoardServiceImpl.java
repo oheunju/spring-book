@@ -64,6 +64,9 @@ public class BoardServiceImpl implements BoardService
     public boolean remove(Long bno)
     {
         log.info("remove........." + bno);
+        
+        attachMapper.deleteAll(bno);
+        
         return mapper.delete(bno) == 1;
     }
 
@@ -87,6 +90,5 @@ public class BoardServiceImpl implements BoardService
         log.info("get Attach list by bno" + bno);
         return attachMapper.findByBno(bno);
     }
-
 
 }
