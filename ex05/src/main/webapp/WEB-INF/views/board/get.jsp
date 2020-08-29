@@ -525,7 +525,7 @@ $(function()
 	{
 		console.log(data);
 	});
-	
+	*/
 	var operForm = $("#operForm");
 	
 	$("button[data-oper='modify']").on("click", function(e)
@@ -537,7 +537,7 @@ $(function()
 	{
 		operForm.find("#bno").remove();
 		operForm.attr("action", "/board/list").submit();
-	}); */
+	}); 
 });
 </script>
 
