@@ -5,13 +5,51 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="customAccessDenied" class="org.zerock.security.CustomeAccessDeniedHandler"></bean>
+	<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean>
+	
 	<!-- 
 			web.xml의 springSecurityFilterChain 설정
 	 -->
-	<security:http>
-		<security:form-login />
-	</security:http>
-	<security:authentication-manager>
+	<security:http auto-config="true" use-expressions="true">
 	
+		<security:intercept-url pattern="/sample/all" access="permitAll"/>
+		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!-- 
+				로그인 페이지
+		 -->
+		<!-- 기본 제공 로그인 페이지 -->
+		<!-- <security:form-login /> -->
+		<!-- custome login page -->
+		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+
+		<!-- 
+				로그아웃 페이지
+		 -->
+		 <security:logout logout-url="/customLogout" invalidate-session="true"/>
+
+		<!-- 
+				ACCESS-DENIED
+		 -->		
+		<!-- <security:access-denied-handler error-page="/accessError"/> -->
+		<!-- interface로 직접 구현 -->
+		<security:access-denied-handler ref="customAccessDenied"/>
+	</security:http>
+	
+	<!-- 
+			UserDetailsService
+	 -->
+	<security:authentication-manager>
+		
+		<security:authentication-provider>
+			<security:user-service>
+				<!-- password encoding 처리 없이 사용하고 싶다면 패스워드 앞에 '{noop}' 문자열을 추가 -->
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
+			</security:user-service>
+		</security:authentication-provider>
+		
 	</security:authentication-manager>
 </beans>
