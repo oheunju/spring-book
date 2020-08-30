@@ -17,4 +17,9 @@
 	<delete id="deleteAll">
 	delete tbl_attach where bno = #{bno}
 	</delete>
+	
+	<!-- 어제 등록된 첨부파일 DB 가져오기 -->
+	<select id="getOldFiles" resultType="org.zerock.domain.BoardAttachVO">
+	select * from tbl_attach where uploadpath = to_char(sysdate -1, 'yyyy\mm\dd')
+	</select>
 </mapper>

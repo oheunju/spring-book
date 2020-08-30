@@ -347,7 +347,7 @@ $(function()
 			
 			var str = "";
 			
-			$(".uploadRresult ul li").each(function(i, obj)
+			$(".uploadResult ul li").each(function(i, obj)
 			{
 				var jobj = $(obj);
 				
