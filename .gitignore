@@ -20,3 +20,21 @@ Servers2/Tomcat v8.5 Server at localhost-config/context.xml
 Servers2/Tomcat v8.5 Server at localhost-config/server.xml
 Servers2/Tomcat v8.5 Server at localhost-config/tomcat-users.xml
 Servers2/Tomcat v8.5 Server at localhost-config/web.xml
+ex06/.settings/org.eclipse.jdt.core.prefs
+ex06/.settings/org.eclipse.m2e.core.prefs
+ex06/.settings/org.eclipse.wst.common.component
+ex06/.settings/org.eclipse.wst.common.project.facet.core.xml
+ex06/.settings/org.eclipse.wst.validation.prefs
+ex06/.settings/org.springframework.ide.eclipse.beans.core.prefs
+ex06/.settings/org.springframework.ide.eclipse.core.prefs
+ex06/target/classes/log4j.xml
+ex06/target/classes/log4jdbc.log4j2.properties
+ex06/target/classes/org/zerock/controller/HomeController.class
+ex06/target/classes/org/zerock/controller/SampleController.class
+ex06/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+ex06/target/m2e-wtp/web-resources/META-INF/maven/org.zerock/controller/pom.properties
+ex06/target/m2e-wtp/web-resources/META-INF/maven/org.zerock/controller/pom.xml
+ex06/target/test-classes/log4j.xml
+ex06/.classpath
+ex06/.project
+ex06/.springBeans

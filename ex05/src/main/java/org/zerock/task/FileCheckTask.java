@@ -41,7 +41,7 @@ public class FileCheckTask
     /*
      *      cron
      *      - 주기를 제어
-     *      - 매잂 2시간 0분 0초마다 실행되도록 지정한 것 (1분에 한 번씩 로그 기록)
+     *      - 매일 새벽 2시에 실행되도록 지정한 것 
      *      - seconds, minutes, hours, day, months, day of week, yaer(optional) 순서
      */
     @Scheduled(cron="0 0 2 * * *")
