@@ -38,3 +38,4 @@ ex06/target/test-classes/log4j.xml
 ex06/.classpath
 ex06/.project
 ex06/.springBeans
+ex06/src/main/webapp/WEB-INF/lib/spring-security-taglibs-5.0.6.RELEASE.jar
