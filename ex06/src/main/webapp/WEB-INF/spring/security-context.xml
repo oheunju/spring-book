@@ -9,7 +9,8 @@
 	<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean>
 	<!-- <bean id="customPasswordEncoder" class="org.zerock.security.CustomNoOpPasswordEncoder"></bean> -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-	
+	<bean id="customUserDetailsService" class="org.zerock.security.CustomUserDetailsService"></bean>
+		
 	<!-- 
 			web.xml의 springSecurityFilterChain 설정
 	 -->
@@ -45,7 +46,7 @@
 	 -->
 	<security:authentication-manager>
 		
-		<security:authentication-provider>
+		<security:authentication-provider user-service-ref="customUserDetailsService">
 			<!-- InMemoryUserDetailsmanager -->
 			<!-- <security:user-service>
 				password encoding 처리 없이 사용하고 싶다면 패스워드 앞에 '{noop}' 문자열을 추가
@@ -55,9 +56,10 @@
 			
 			<!-- JDBC 이용 -->
 			<!-- <security:jdbc-user-service data-source-ref="dataSource"/> -->
-			<security:jdbc-user-service data-source-ref="dataSource"
+			<!-- <security:jdbc-user-service data-source-ref="dataSource"
 										users-by-username-query="select userid, userpw, enabled from tbl_member where userid = ?"
-										authorities-by-username-query="select  userid, auth from tbl_member_auth where userid = ?"/>
+										authorities-by-username-query="select  userid, auth from tbl_member_auth where userid = ?"/> -->
+			<!-- password encoder -->										
 			<!-- <security:password-encoder ref="customPasswordEncoder"/> -->
 			<security:password-encoder ref="bcryptPasswordEncoder"/>
 		</security:authentication-provider>
