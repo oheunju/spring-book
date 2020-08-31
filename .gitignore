@@ -39,3 +39,13 @@ ex06/.classpath
 ex06/.project
 ex06/.springBeans
 ex06/src/main/webapp/WEB-INF/lib/spring-security-taglibs-5.0.6.RELEASE.jar
+jex06/.project
+jex06/.classpath
+jex06/.springBeans
+jex06/.settings/org.eclipse.jdt.core.prefs
+jex06/.settings/org.eclipse.m2e.core.prefs
+jex06/.settings/org.eclipse.wst.common.component
+jex06/.settings/org.eclipse.wst.common.project.facet.core.xml
+jex06/.settings/org.eclipse.wst.validation.prefs
+jex06/.settings/org.springframework.ide.eclipse.beans.core.prefs
+jex06/.settings/org.springframework.ide.eclipse.core.prefs
