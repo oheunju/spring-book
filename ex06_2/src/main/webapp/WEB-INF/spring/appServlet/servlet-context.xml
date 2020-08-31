@@ -26,6 +26,14 @@
 	<context:component-scan base-package="org.zerock.controller" />
 	
 	<!-- 
+			web.xml의 설정은 WAS(Tomcat) 자체의 설정일 뿐이고, 
+			스프링에서 업로드 처리는 MultipatrtResolver라는 타입의 객체를 빈으로 등록해야만 가능
+	 -->
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+   </beans:bean>
+   
+	<!-- 
 			어노테이션을 위한 설정
 	 -->
 	<security:global-method-security pre-post-annotations="enabled"
