@@ -50,6 +50,7 @@ var replyService = (function()
 		{
 			type : 'delete',
 			url : '/replies/' + rno,
+			data: JSON.stringify({rno:rno, replyer:replyer}),
 			success : function(deleteResult, status, xhr) 
 			{
 				if(callback)

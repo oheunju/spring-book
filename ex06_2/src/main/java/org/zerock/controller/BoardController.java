@@ -94,6 +94,7 @@ public class BoardController
         model.addAttribute("board", service.get(bno));
     }
     
+    @PreAuthorize("principal.username == #board.writer")
     @PostMapping("/modify")
     public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr)
     {
